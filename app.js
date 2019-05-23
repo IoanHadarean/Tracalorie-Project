@@ -52,12 +52,20 @@ const UICtrl = (function() {
                          </a>
                          </li>`;
             });
+        },
+        getSelectors: function() {
+            return UISelectors;
         }
     };
 })();
 
 // App Controller
 const AppCtrl = (function(ItemCtrl, UICtrl) {
+    // Load event listeners
+    const loadEventListeners =  function() {
+        
+    };
+    
     
     // Public methods
     return {
