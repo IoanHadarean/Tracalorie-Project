@@ -34,12 +34,16 @@ const ItemCtrl = (function() {
 // UI Controller
 const UICtrl = (function() {
     
+    const UISelectors = {
+        ItemList: 'item-list'
+    };
+    
     // Public methods
     return {
         populateItemList: function(items) {
             
             // Insert items into item list
-            let itemList = document.getElementById('item-list');
+            let itemList = document.getElementById(UISelectors.ItemList);
             items.forEach(function(item) {
                 itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
                          <strong>${item.name}</strong> <em></em>${item.calories}
