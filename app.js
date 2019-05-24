@@ -90,7 +90,6 @@ const ItemCtrl = (function() {
                 }
             });
             
-            console.log(data.items);
         },
         logData: function() {
             return data;
@@ -178,11 +177,7 @@ const UICtrl = (function() {
         },
         updateItemInList: function(currentItem) {
             
-            // Get Current Item
-            currentItem =  ItemCtrl.getCurrentItem();
-            
             let listItems = document.getElementsByClassName(UISelectors.ListItems);
-            
             
             // Loop through the items in the ul
             for (var i = 0; i < listItems.length; i++) {
@@ -198,7 +193,30 @@ const UICtrl = (function() {
                 
                 // Check if the item id matches with the current item id
                 if (itemId === currentItem.id) {
-                    listItems[i].innerText = currentItem.name + " " + currentItem.calories;
+                    listItems[i].firstElementChild.innerHTML = currentItem.name;
+                }
+            }
+        },
+        deleteItemFromList: function(currentItem) {
+            let listItems = document.getElementsByClassName(UISelectors.ListItems);
+            
+            let itemList = document.querySelector(UISelectors.ItemList);
+            
+            // Loop through the items in the ul
+            for (var i = 0; i < listItems.length; i++) {
+                
+                // Get list item id
+                const id = listItems[i].id;
+                
+                // Split into an array
+                const listIdArray = id.split('-');
+                
+                // Get the actual item id
+                const itemId = parseInt(listIdArray[1]);
+                
+                // Check if the item id matches with the current item id
+                if (itemId === currentItem.id) {
+                    itemList.removeChild(listItems[i]);
                 }
             }
         },
@@ -305,8 +323,8 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         // Delete current item
         ItemCtrl.deleteCurrentItem(currentItem);
         
-        //  // Delete item in the UI
-        // UICtrl.deleteItemInList(currentItem);
+         // Delete item in the UI
+        UICtrl.deleteItemFromList(currentItem);
         
         e.preventDefault();
     };
