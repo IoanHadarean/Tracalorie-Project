@@ -12,9 +12,9 @@ const ItemCtrl = (function() {
     // Data Structure / State
     const data = {
         items: [ 
-            {id: 0, name: 'Steak Dinner', calories: 1200},
-            {id: 1, name: 'Cookie', calories: 400},
-            {id: 2, name: 'Eggs', calories: 300}
+            // {id: 0, name: 'Steak Dinner', calories: 1200},
+            // {id: 1, name: 'Cookie', calories: 400},
+            // {id: 2, name: 'Eggs', calories: 300}
         ],
         currentItem: null,
         totalCalories: 0
@@ -98,6 +98,9 @@ const UICtrl = (function() {
             document.querySelector(UISelectors.ItemNameInput).value = '';
             document.querySelector(UISelectors.ItemCaloriesInput).value = '';
         },
+        hideList: function() {
+            document.querySelector(UISelectors.ItemList).style.display = 'none';
+        },
         getSelectors: function() {
             return UISelectors;
         }
@@ -144,8 +147,13 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
             // Fetch items from data structure
             const items = ItemCtrl.getItems();
             
-            // Populate list with items
-            UICtrl.populateItemList(items);
+            // Check if any items
+            if(items.length === 0) {
+                UICtrl.hideList();
+            }else {
+                // Populate list with items
+                UICtrl.populateItemList(items);
+            }
             
             // Load event listeners
             loadEventListeners();
