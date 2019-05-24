@@ -69,6 +69,9 @@ const ItemCtrl = (function() {
             });
             return found;
         },
+        setCurrentItem: function(itemToEdit) {
+            data.currentItem =  itemToEdit;
+        },
         logData: function() {
             return data;
         }
@@ -203,6 +206,8 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
             // Get item
             const itemToEdit = ItemCtrl.getItemById(id);
             
+            // Set current item
+            ItemCtrl.setCurrentItem(itemToEdit);
         }
         e.preventDefault();
     };
