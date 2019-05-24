@@ -224,7 +224,6 @@ const UICtrl = (function() {
                 
                 // Check if the item id matches with the current item id
                 if (itemId === currentItem.id) {
-                    
                     itemList.removeChild(listItems[i]);
                     totalCalories.innerHTML = ItemCtrl.getTotalCalories();
                 }
@@ -262,8 +261,12 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         
         // Update button click event
         document.querySelector(UISelectors.UpdateBtn).addEventListener('click', updateItem);
-    
+        
+        // Delete button click event
         document.querySelector(UISelectors.DeleteBtn).addEventListener('click', deleteItem);
+        
+        // Back button click event
+        document.querySelector(UISelectors.BackBtn).addEventListener('click', UICtrl.clearEditState());
     };
     
     // Add item submit
@@ -320,8 +323,8 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
     const updateItem = function(e) {
         
         // Get values from form
-        const name = document.querySelector(UICtrl.getSelectors().ItemNameInput).value;
-        const calories = document.querySelector(UICtrl.getSelectors().ItemCaloriesInput).value;
+        const name = UICtrl.getItemInput().name;
+        const calories = UICtrl.getItemInput().calories;
 
         // Update current item
         ItemCtrl.updateCurrentItem(name, calories);
