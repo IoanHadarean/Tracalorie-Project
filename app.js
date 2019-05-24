@@ -65,7 +65,7 @@ const UICtrl = (function() {
     return {
         populateItemList: function(items) {
             
-            // Insert items into item list
+            // Insert items into item list(UI)
             let itemList = document.getElementById(UISelectors.ItemList);
             items.forEach(function(item) {
                 itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
@@ -75,6 +75,17 @@ const UICtrl = (function() {
                          </a>
                          </li>`;
             });
+        },
+        addListItem: function(item) {
+            
+            // Insert item into item list(UI)
+            let itemList = document.getElementById(UISelectors.ItemList);
+            itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
+                         <strong>${item.name}</strong> <em></em>${item.calories}
+                         <a href="#" class="secondary-content">
+                            <i class="edit-item fa fa-pencil"></i>
+                         </a>
+                         </li>`;
         },
         getItemInput: function() {
             return {
@@ -109,6 +120,8 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         if(input.name !== '' && input.calories !== '') {
             // Add item
             const newItem = ItemCtrl.addItem(input.name, input.calories);
+            // Add item to UI list
+            UICtrl.addListItem(newItem);
         }
         
         e.preventDefault();
