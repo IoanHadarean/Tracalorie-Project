@@ -168,15 +168,10 @@ const UICtrl = (function() {
             // Get Current Item
             currentItem =  ItemCtrl.getCurrentItem();
             
-            // Get item id
-            
-            console.log(currentItem);
-            
             let listItems = document.getElementsByClassName(UISelectors.ListItems);
             
-            console.log(listItems);
             
-            // Loop through the items in the ul and check if the item id matches with the current item id
+            // Loop through the items in the ul
             for (var i = 0; i < listItems.length; i++) {
                 
                 // Get list item id
@@ -188,6 +183,7 @@ const UICtrl = (function() {
                 // Get the actual item id
                 const itemId = parseInt(listIdArray[1]);
                 
+                // Check if the item id matches with the current item id
                 if (itemId === currentItem.id) {
                     listItems[i].innerText = currentItem.name + " " + currentItem.calories;
                 }
@@ -280,8 +276,6 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         
         // Get current item 
         const currentItem = ItemCtrl.getCurrentItem();
-        
-        console.log(currentItem);
         
         // Update item in the UI
         UICtrl.updateItemInList(currentItem);
