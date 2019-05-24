@@ -72,6 +72,9 @@ const ItemCtrl = (function() {
         setCurrentItem: function(itemToEdit) {
             data.currentItem =  itemToEdit;
         },
+        getCurrentItem: function() {
+            return data.currentItem;
+        },
         logData: function() {
             return data;
         }
@@ -130,6 +133,10 @@ const UICtrl = (function() {
             // Clear input fields
             document.querySelector(UISelectors.ItemNameInput).value = '';
             document.querySelector(UISelectors.ItemCaloriesInput).value = '';
+        },
+        addItemToForm: function() {
+            document.querySelector(UISelectors.ItemNameInput).value = ItemCtrl.getCurrentItem().name;
+            document.querySelector(UISelectors.ItemCaloriesInput).value = ItemCtrl.getCurrentItem().calories;
         },
         hideList: function() {
             document.querySelector(UISelectors.ItemList).style.display = 'none';
@@ -208,6 +215,9 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
             
             // Set current item
             ItemCtrl.setCurrentItem(itemToEdit);
+            
+            // Add item to form
+            UICtrl.addItemToForm();
         }
         e.preventDefault();
     };
