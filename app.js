@@ -108,6 +108,7 @@ const UICtrl = (function() {
         UpdateBtn: '.update-btn',
         DeleteBtn: '.delete-btn',
         BackBtn: '.back-btn',
+        ClearBtn: '.clear-btn',
         ItemNameInput: '#item-name',
         ItemCaloriesInput: "#item-calories",
         TotalCalories: '.total-calories',
@@ -267,6 +268,9 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         
         // Back button click event
         document.querySelector(UISelectors.BackBtn).addEventListener('click', UICtrl.clearEditState());
+        
+         // Clear items event
+        document.querySelector(UISelectors.BackBtn).addEventListener('click', clearAllItemsClick);
     };
     
     // Add item submit
@@ -359,6 +363,11 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         e.preventDefault();
     };
     
+    // Clear items event
+    const clearAllItemsClick =  function() {
+        // Delete all items from data structure
+        ItemCtrl.clearAllItems;
+    };
     
     
     // Public methods
