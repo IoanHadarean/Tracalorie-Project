@@ -1,7 +1,7 @@
 /*global localStorage */
 
 // Storage Controller
-const StorageCtrl =  (function() {
+const StorageCtrl = (function() {
     return {
         storeItem: function(item) {
             let items = [];
@@ -25,7 +25,7 @@ const StorageCtrl =  (function() {
         }
         
     };
-});
+})();
 
 // Item Controller
 const ItemCtrl = (function() {
