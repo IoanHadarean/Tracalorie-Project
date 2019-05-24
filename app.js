@@ -32,7 +32,37 @@ const StorageCtrl = (function() {
                 items = JSON.parse(localStorage.getItem('items'));
             }
             return items;
-        }
+        },
+        updateItemStorage: function(currentItem) {
+            let items =  JSON.parse(localStorage.getItem('items'));
+            
+            items.forEach(function(item, index) {
+                if (item.id === currentItem.id) {
+                    items.splice(index, 1, currentItem);
+                }
+            });
+            
+            localStorage.setItem('items', JSON.stringify(items));
+            
+        },
+        deleteItemFromStorage: function(currentItem) {
+            let items;
+            
+            if (localStorage.getItem('items') === null) {
+                items = [];
+            }else {
+                items = JSON.parse(localStorage.getItem('items'));
+            
+                items.forEach(function(item, index) {
+                     if (item.id === currentItem.id) {
+                         console.log(item);
+                         items.splice(index, 1);
+                     }
+                 });
+            }
+            
+            localStorage.setItem('items', JSON.stringify(items));
+        },
     };
 })();
 
@@ -391,6 +421,9 @@ const AppCtrl = (function(ItemCtrl, StorageCtrl, UICtrl) {
         // Update item in the UI
         UICtrl.updateItemInList(currentItem);
         
+        // Update item in local storage
+        StorageCtrl.updateItemStorage(currentItem);
+        
         // Clear Edit State
         UICtrl.clearEditState();
         
@@ -402,6 +435,9 @@ const AppCtrl = (function(ItemCtrl, StorageCtrl, UICtrl) {
         
         // Get current item 
         const currentItem = ItemCtrl.getCurrentItem();
+        
+        // Delete item from local storage
+        StorageCtrl.deleteItemFromStorage(currentItem);
         
         // Delete current item
         ItemCtrl.deleteCurrentItem(currentItem);
