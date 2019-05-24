@@ -55,7 +55,7 @@ const ItemCtrl = (function() {
 const UICtrl = (function() {
     
     const UISelectors = {
-        ItemList: 'item-list',
+        ItemList: '#item-list',
         AddBtn: '.add-btn',
         ItemNameInput: '#item-name',
         ItemCaloriesInput: "#item-calories"
@@ -66,7 +66,7 @@ const UICtrl = (function() {
         populateItemList: function(items) {
             
             // Insert items into item list(UI)
-            let itemList = document.getElementById(UISelectors.ItemList);
+            let itemList = document.querySelector(UISelectors.ItemList);
             items.forEach(function(item) {
                 itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
                          <strong>${item.name}</strong> <em></em>${item.calories}
@@ -79,7 +79,7 @@ const UICtrl = (function() {
         addListItem: function(item) {
             
             // Insert item into item list(UI)
-            let itemList = document.getElementById(UISelectors.ItemList);
+            let itemList = document.querySelector(UISelectors.ItemList);
             itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
                          <strong>${item.name}</strong> <em></em>${item.calories}
                          <a href="#" class="secondary-content">
@@ -92,6 +92,11 @@ const UICtrl = (function() {
                 name: document.querySelector(UISelectors.ItemNameInput).value,
                 calories: document.querySelector(UISelectors.ItemCaloriesInput).value
             };
+        },
+        clearInput: function() {
+            // Clear input fields
+            document.querySelector(UISelectors.ItemNameInput).value = '';
+            document.querySelector(UISelectors.ItemCaloriesInput).value = '';
         },
         getSelectors: function() {
             return UISelectors;
@@ -120,8 +125,12 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         if(input.name !== '' && input.calories !== '') {
             // Add item
             const newItem = ItemCtrl.addItem(input.name, input.calories);
+            
             // Add item to UI list
             UICtrl.addListItem(newItem);
+            
+            // Clear form fields
+            UICtrl.clearInput();
         }
         
         e.preventDefault();
