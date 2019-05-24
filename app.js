@@ -86,6 +86,7 @@ const ItemCtrl = (function() {
             // delete it from list
             data.items.forEach(function(item, index) {
                 if (item.id === currentItem.id) {
+                    data.totalCalories -= currentItem.calories;
                     data.items.splice(index, 1);
                 }
             });
@@ -216,7 +217,9 @@ const UICtrl = (function() {
                 
                 // Check if the item id matches with the current item id
                 if (itemId === currentItem.id) {
+                    
                     itemList.removeChild(listItems[i]);
+                    document.querySelector(UISelectors.TotalCalories).innerHTML = ItemCtrl.getTotalCalories();
                 }
             }
         },
