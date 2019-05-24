@@ -77,6 +77,8 @@ const UICtrl = (function() {
             });
         },
         addListItem: function(item) {
+            // Show the list
+            document.querySelector(UISelectors.ItemList).style.display = 'block';
             
             // Insert item into item list(UI)
             let itemList = document.querySelector(UISelectors.ItemList);
