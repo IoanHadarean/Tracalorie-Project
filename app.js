@@ -121,7 +121,7 @@ const UICtrl = (function() {
             let itemList = document.querySelector(UISelectors.ItemList);
             items.forEach(function(item) {
                 itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
-                         <strong>${item.name}</strong> <em></em>${item.calories}
+                         <strong>${item.name}</strong> <em>${item.calories}</em>
                          <a href="#" class="secondary-content">
                             <i class="edit-item fa fa-pencil"></i>
                          </a>
@@ -135,7 +135,7 @@ const UICtrl = (function() {
             // Insert item into item list(UI)
             let itemList = document.querySelector(UISelectors.ItemList);
             itemList.innerHTML += `<li id = "item-${item.id}" class = "collection-item">
-                         <strong>${item.name}</strong> <em></em>${item.calories}
+                         <strong>${item.name}</strong> <em>${item.calories}</em>
                          <a href="#" class="secondary-content">
                             <i class="edit-item fa fa-pencil"></i>
                          </a>
@@ -194,7 +194,8 @@ const UICtrl = (function() {
                 
                 // Check if the item id matches with the current item id
                 if (itemId === currentItem.id) {
-                    listItems[i].firstElementChild.innerHTML = currentItem.name;
+                    listItems[i].children[0].innerHTML = currentItem.name;
+                    listItems[i].children[1].innerHTML = currentItem.calories;
                 }
             }
         },
