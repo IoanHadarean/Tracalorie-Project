@@ -77,7 +77,7 @@ const ItemCtrl = (function() {
         },
         updateCurrentItem: function(name, calories) {
             data.currentItem.name = name;
-            data.currentItem.calories = calories;
+            data.currentItem.calories = parseInt(calories);
         },
         deleteCurrentItem: function(currentItem) {
             
@@ -180,6 +180,8 @@ const UICtrl = (function() {
             
             let listItems = document.getElementsByClassName(UISelectors.ListItems);
             
+            let totalCalories = document.querySelector(UISelectors.TotalCalories);
+            
             // Loop through the items in the ul
             for (var i = 0; i < listItems.length; i++) {
                 
@@ -196,6 +198,7 @@ const UICtrl = (function() {
                 if (itemId === currentItem.id) {
                     listItems[i].children[0].innerHTML = currentItem.name;
                     listItems[i].children[1].innerHTML = currentItem.calories;
+                    totalCalories.innerHTML = ItemCtrl.getTotalCalories();
                 }
             }
         },
@@ -203,6 +206,8 @@ const UICtrl = (function() {
             let listItems = document.getElementsByClassName(UISelectors.ListItems);
             
             let itemList = document.querySelector(UISelectors.ItemList);
+            
+            let totalCalories = document.querySelector(UISelectors.TotalCalories);
             
             // Loop through the items in the ul
             for (var i = 0; i < listItems.length; i++) {
@@ -220,7 +225,7 @@ const UICtrl = (function() {
                 if (itemId === currentItem.id) {
                     
                     itemList.removeChild(listItems[i]);
-                    document.querySelector(UISelectors.TotalCalories).innerHTML = ItemCtrl.getTotalCalories();
+                    totalCalories.innerHTML = ItemCtrl.getTotalCalories();
                 }
             }
         },
