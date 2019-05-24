@@ -79,6 +79,19 @@ const ItemCtrl = (function() {
             data.currentItem.name = name;
             data.currentItem.calories = calories;
         },
+        deleteCurrentItem: function(currentItem) {
+            
+            // Loop through the data items
+            // If the id is equal to the currentItem id
+            // delete it from list
+            data.items.forEach(function(item, index) {
+                if (item.id === currentItem.id) {
+                    data.items.splice(index, 1);
+                }
+            });
+            
+            console.log(data.items);
+        },
         logData: function() {
             return data;
         }
@@ -285,6 +298,16 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
     
     // Delete item from item list
     const deleteItem =  function(e) {
+        
+        // Get current item 
+        const currentItem = ItemCtrl.getCurrentItem();
+        
+        // Delete current item
+        ItemCtrl.deleteCurrentItem(currentItem);
+        
+        //  // Delete item in the UI
+        // UICtrl.deleteItemInList(currentItem);
+        
         e.preventDefault();
     };
     
