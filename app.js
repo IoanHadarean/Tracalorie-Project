@@ -93,6 +93,9 @@ const ItemCtrl = (function() {
             });
             
         },
+        clearAllItems: function() {
+            data.items = [];
+        },
         logData: function() {
             return data;
         }
@@ -230,6 +233,16 @@ const UICtrl = (function() {
                 }
             }
         },
+        removeItems: function() {
+           let listItems =  document.querySelectorAll(UISelectors.listItems);
+           
+           // Turn Node list into array
+           listItems =  Array.from(listItems);
+           
+           listItems.forEach(function(item) {
+               item.remove();
+           });
+        },
         getSelectors: function() {
             return UISelectors;
         }
@@ -366,7 +379,10 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
     // Clear items event
     const clearAllItemsClick =  function() {
         // Delete all items from data structure
-        ItemCtrl.clearAllItems;
+        ItemCtrl.clearAllItems();
+        
+        // Remove from UI
+        UICtrl.removeItems();
     };
     
     
