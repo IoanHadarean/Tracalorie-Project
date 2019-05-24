@@ -46,23 +46,19 @@ const StorageCtrl = (function() {
             
         },
         deleteItemFromStorage: function(currentItem) {
-            let items;
+            let items = JSON.parse(localStorage.getItem('items'));
             
-            if (localStorage.getItem('items') === null) {
-                items = [];
-            }else {
-                items = JSON.parse(localStorage.getItem('items'));
-            
-                items.forEach(function(item, index) {
-                     if (item.id === currentItem.id) {
-                         console.log(item);
-                         items.splice(index, 1);
-                     }
-                 });
-            }
+            items.forEach(function(item, index) {
+                if (item.id === currentItem.id) {
+                    items.splice(index, 1);
+                }
+            });
             
             localStorage.setItem('items', JSON.stringify(items));
         },
+        clearStorage: function() {
+            localStorage.removeItem('items');
+        }
     };
 })();
 
@@ -458,6 +454,9 @@ const AppCtrl = (function(ItemCtrl, StorageCtrl, UICtrl) {
         
         // Remove from UI
         UICtrl.removeItems();
+        
+        // Clear local storage
+        StorageCtrl.clearStorage();
         
         // Hide list
         UICtrl.hideList();
