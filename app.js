@@ -75,6 +75,10 @@ const ItemCtrl = (function() {
         getCurrentItem: function() {
             return data.currentItem;
         },
+         updateCurrentItem: function(name, calories) {
+            data.currentItem.name = name;
+            data.currentItem.calories = calories;
+        },
         logData: function() {
             return data;
         }
@@ -242,7 +246,13 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         console.log(name);
         console.log(calories);
         
-        ItemCtrl.updateCurrentItem()
+        ItemCtrl.updateCurrentItem(name, calories);
+        
+        const currentItem = ItemCtrl.getCurrentItem();
+        
+        console.log(currentItem);
+        
+        UICtrl.updateItemInList();
         
         e.preventDefault();
     };
