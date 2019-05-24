@@ -115,7 +115,7 @@ const UICtrl = (function() {
         ItemNameInput: '#item-name',
         ItemCaloriesInput: "#item-calories",
         TotalCalories: '.total-calories',
-        ListItems: 'collection-item'
+        ListItems: '.collection-item'
     };
     
     // Public methods
@@ -183,7 +183,7 @@ const UICtrl = (function() {
         },
         updateItemInList: function(currentItem) {
             
-            let listItems = document.getElementsByClassName(UISelectors.ListItems);
+            let listItems = document.querySelectorAll(UISelectors.ListItems);
             
             let totalCalories = document.querySelector(UISelectors.TotalCalories);
             
@@ -208,7 +208,7 @@ const UICtrl = (function() {
             }
         },
         deleteItemFromList: function(currentItem) {
-            let listItems = document.getElementsByClassName(UISelectors.ListItems);
+            let listItems = document.querySelectorAll(UISelectors.ListItems);
             
             let itemList = document.querySelector(UISelectors.ItemList);
             
@@ -234,7 +234,7 @@ const UICtrl = (function() {
             }
         },
         removeItems: function() {
-           let listItems =  document.querySelectorAll(UISelectors.listItems);
+           let listItems =  document.querySelectorAll(UISelectors.ListItems);
            
            // Turn Node list into array
            listItems =  Array.from(listItems);
@@ -242,6 +242,10 @@ const UICtrl = (function() {
            listItems.forEach(function(item) {
                item.remove();
            });
+           
+          let totalCalories = document.querySelector(UISelectors.TotalCalories);
+           
+          totalCalories.innerHTML = ItemCtrl.getTotalCalories();
         },
         getSelectors: function() {
             return UISelectors;
@@ -283,7 +287,7 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         document.querySelector(UISelectors.BackBtn).addEventListener('click', UICtrl.clearEditState());
         
          // Clear items event
-        document.querySelector(UISelectors.BackBtn).addEventListener('click', clearAllItemsClick);
+        document.querySelector(UISelectors.ClearBtn).addEventListener('click', clearAllItemsClick);
     };
     
     // Add item submit
@@ -383,6 +387,9 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         
         // Remove from UI
         UICtrl.removeItems();
+        
+        // Hide list
+        UICtrl.hideList();
     };
     
     
