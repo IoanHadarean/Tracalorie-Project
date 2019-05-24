@@ -177,6 +177,10 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         // Edit icon click event
         document.querySelector(UISelectors.ItemList).addEventListener('click', itemUpdateSubmit);
         
+        // Update button click event
+        document.querySelector(UISelectors.UpdateBtn).addEventListener('click', updateItem);
+    
+        document.querySelector(UISelectors.DeleteBtn).addEventListener('click', deleteItem);
     };
     
     // Add item submit
@@ -228,6 +232,26 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         }
         e.preventDefault();
     };
+    
+    // Update Item in item list
+    const updateItem = function(e) {
+        
+        const name = document.querySelector(UICtrl.getSelectors().ItemNameInput).value;
+        const calories = document.querySelector(UICtrl.getSelectors().ItemCaloriesInput).value;
+        
+        console.log(name);
+        console.log(calories);
+        
+        ItemCtrl.updateCurrentItem()
+        
+        e.preventDefault();
+    };
+    
+    // Delete item from item list
+    const deleteItem =  function(e) {
+        e.preventDefault();
+    };
+    
     
     
     // Public methods
