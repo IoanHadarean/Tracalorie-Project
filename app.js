@@ -77,6 +77,7 @@ const ItemCtrl = (function() {
         },
         updateCurrentItem: function(name, calories) {
             data.currentItem.name = name;
+            // Parse calories to number
             data.currentItem.calories = parseInt(calories);
         },
         deleteCurrentItem: function(currentItem) {
@@ -331,6 +332,9 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         // Update item in the UI
         UICtrl.updateItemInList(currentItem);
         
+        // Clear Edit State
+        UICtrl.clearEditState();
+        
         e.preventDefault();
     };
     
@@ -345,6 +349,9 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
         
          // Delete item in the UI
         UICtrl.deleteItemFromList(currentItem);
+        
+        // Clear Edit State
+        UICtrl.clearEditState();
         
         e.preventDefault();
     };
