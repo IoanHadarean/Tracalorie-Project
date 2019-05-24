@@ -60,6 +60,15 @@ const ItemCtrl = (function() {
             return data.totalCalories;
             
         },
+        getItemById: function(id) {
+            let found = null;
+            data.items.forEach(function(item) {
+                if (item.id === id) {
+                    found = item;
+                }
+            });
+            return found;
+        },
         logData: function() {
             return data;
         }
@@ -130,7 +139,7 @@ const UICtrl = (function() {
             document.querySelector(UISelectors.UpdateBtn).style.display = 'none';
             document.querySelector(UISelectors.DeleteBtn).style.display = 'none';
             document.querySelector(UISelectors.BackBtn).style.display = 'none';
-             document.querySelector(UISelectors.AddBtn).style.display = 'inline';
+            document.querySelector(UISelectors.AddBtn).style.display = 'inline';
         },
         getSelectors: function() {
             return UISelectors;
@@ -182,7 +191,18 @@ const AppCtrl = (function(ItemCtrl, UICtrl) {
     // Update item submit
     const itemUpdateSubmit = function(e) {
         if (e.target.classList.contains('edit-item')) {
-            console.log(e.target);
+            // Get list item id (item-0, item-1)
+            const listId = e.target.parentNode.parentNode.id;
+            
+            // Break into an array
+            const listIdArray = listId.split('-');
+            
+            // Get the actual id
+            const id = parseInt(listIdArray[1]);
+            
+            // Get item
+            const itemToEdit = ItemCtrl.getItemById(id);
+            
         }
         e.preventDefault();
     };
