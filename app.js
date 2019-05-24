@@ -70,7 +70,7 @@ const ItemCtrl = (function() {
             return found;
         },
         setCurrentItem: function(itemToEdit) {
-            data.currentItem =  itemToEdit;
+            data.currentItem = itemToEdit;
         },
         getCurrentItem: function() {
             return data.currentItem;
@@ -137,6 +137,7 @@ const UICtrl = (function() {
         addItemToForm: function() {
             document.querySelector(UISelectors.ItemNameInput).value = ItemCtrl.getCurrentItem().name;
             document.querySelector(UISelectors.ItemCaloriesInput).value = ItemCtrl.getCurrentItem().calories;
+            UICtrl.showEditState();
         },
         hideList: function() {
             document.querySelector(UISelectors.ItemList).style.display = 'none';
@@ -150,6 +151,12 @@ const UICtrl = (function() {
             document.querySelector(UISelectors.DeleteBtn).style.display = 'none';
             document.querySelector(UISelectors.BackBtn).style.display = 'none';
             document.querySelector(UISelectors.AddBtn).style.display = 'inline';
+        },
+        showEditState: function() {
+            document.querySelector(UISelectors.UpdateBtn).style.display = 'inline';
+            document.querySelector(UISelectors.DeleteBtn).style.display = 'inline';
+            document.querySelector(UISelectors.BackBtn).style.display = 'inline';
+            document.querySelector(UISelectors.AddBtn).style.display = 'none';
         },
         getSelectors: function() {
             return UISelectors;
